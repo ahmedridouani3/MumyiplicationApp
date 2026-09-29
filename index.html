@@ -741,72 +741,54 @@ function setLevelName() {
 
 function newQuestion() {
 
+    // Si on est dans "Mes erreurs"
     if (errorMode) {
-
         generateErrorQuestion();
-
         return;
     }
 
-
     if (level === "facile") {
 
-        /*
-        Quotient de 1 chiffre.
-        Nombres simples pour commencer.
-        */
+        divisor = Math.floor(Math.random() * 5) + 2;
 
-        divisor =
-            Math.floor(Math.random() * 5) + 2;
-
-        dividend =
-            Math.floor(Math.random() * 45) + 10;
-
-
-        while (
-            Math.floor(dividend / divisor) < 1 ||
-            Math.floor(dividend / divisor) > 9
-        ) {
-
-            dividend =
-                Math.floor(Math.random() * 45) + 10;
-        }
+        // Quotient obligatoirement entre 1 et 9
+        dividend = Math.floor(
+            Math.random() * (divisor * 9 - divisor + 1)
+        ) + divisor;
     }
-
 
     else if (level === "moyen") {
 
-        /*
-        Quotient de 1 ou 2 chiffres.
-        */
+        divisor = Math.floor(Math.random() * 8) + 2;
 
-        divisor =
-            Math.floor(Math.random() * 8) + 2;
+        // Quotient entre 1 et 20
+        const quotient =
+            Math.floor(Math.random() * 20) + 1;
+
+        const reste =
+            Math.floor(Math.random() * divisor);
 
         dividend =
-            Math.floor(Math.random() * 90) + 20;
-
+            divisor * quotient + reste;
     }
-
 
     else if (level === "difficile") {
 
-        /*
-        Nombres plus grands.
-        Quotient pouvant être à 2 chiffres.
-        */
+        divisor = Math.floor(Math.random() * 8) + 2;
 
-        divisor =
-            Math.floor(Math.random() * 8) + 2;
+        // Quotient entre 10 et 50
+        const quotient =
+            Math.floor(Math.random() * 41) + 10;
+
+        const reste =
+            Math.floor(Math.random() * divisor);
 
         dividend =
-            Math.floor(Math.random() * 400) + 100;
+            divisor * quotient + reste;
     }
-
 
     displayQuestion();
 }
-
 
 /* =====================================================
    QUESTION DANS L'ÉCRAN
@@ -1116,17 +1098,13 @@ function saveError(
 
 function nextQuestion() {
 
+    // MODE "MES ERREURS"
     if (errorMode) {
 
         errorIndex++;
 
-        if (
-            errorIndex >=
-            errorQuestions.length
-        ) {
-
+        if (errorIndex >= errorQuestions.length) {
             showFinal();
-
             return;
         }
 
@@ -1136,17 +1114,32 @@ function nextQuestion() {
         divisor =
             errorQuestions[errorIndex].divisor;
 
+        displayQuestion();
+
+        return;
     }
 
-    else {
+    // MODE NORMAL
+    questionNumber++;
 
-        questionNumber++;
+    newQuestion();
+}
+
+function generateErrorQuestion() {
+
+    if (errorQuestions.length === 0) {
+        showErrors();
+        return;
     }
 
+    dividend =
+        errorQuestions[errorIndex].dividend;
+
+    divisor =
+        errorQuestions[errorIndex].divisor;
 
     displayQuestion();
 }
-
 
 /* =====================================================
    FIN DE PARTIE
