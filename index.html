@@ -5,152 +5,194 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#4CAF50">
 
-<title>Division : quotient et reste</title>
+<title>Jeu du Quotient et du Reste</title>
 
 <style>
-    * {
-        box-sizing: border-box;
-    }
+* {
+    box-sizing: border-box;
+}
 
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #f2f7f3;
-        display: flex;
-        justify-content: center;
-        min-height: 100vh;
-    }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #e8f5e9, #e3f2fd);
+    min-height: 100vh;
+}
 
-    .app {
-        width: 100%;
-        max-width: 500px;
-        padding: 20px;
-        text-align: center;
-    }
+.app {
+    max-width: 500px;
+    margin: auto;
+    padding: 15px;
+    text-align: center;
+}
 
+h1 {
+    font-size: 28px;
+    color: #2e7d32;
+    margin: 10px 0;
+}
+
+.subtitle {
+    font-size: 19px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.score {
+    background: white;
+    border-radius: 20px;
+    padding: 12px;
+    font-size: 22px;
+    font-weight: bold;
+    box-shadow: 0 3px 10px #ccc;
+}
+
+.stars {
+    font-size: 30px;
+    margin: 8px;
+}
+
+.card {
+    background: white;
+    border-radius: 25px;
+    padding: 22px 15px;
+    margin-top: 15px;
+    box-shadow: 0 5px 15px #ccc;
+}
+
+.question-number {
+    font-size: 18px;
+    color: #777;
+}
+
+.question {
+    font-size: 44px;
+    font-weight: bold;
+    margin: 20px 0;
+    color: #1565c0;
+}
+
+.help {
+    font-size: 19px;
+    background: #fff8e1;
+    border-radius: 15px;
+    padding: 12px;
+    margin-bottom: 18px;
+}
+
+.answers {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.box {
+    width: 45%;
+}
+
+.box label {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+input {
+    width: 100%;
+    height: 65px;
+    border: 3px solid #90caf9;
+    border-radius: 15px;
+    font-size: 30px;
+    text-align: center;
+    outline: none;
+}
+
+input:focus {
+    border-color: #2196f3;
+}
+
+button {
+    width: 90%;
+    max-width: 350px;
+    border: none;
+    border-radius: 18px;
+    padding: 16px;
+    margin: 10px auto;
+    font-size: 22px;
+    font-weight: bold;
+    display: block;
+    cursor: pointer;
+}
+
+#check {
+    background: #4caf50;
+    color: white;
+}
+
+#next {
+    background: #2196f3;
+    color: white;
+    display: none;
+}
+
+#restart {
+    background: #ff9800;
+    color: white;
+}
+
+.message {
+    min-height: 40px;
+    font-size: 22px;
+    font-weight: bold;
+    margin: 12px;
+}
+
+.good {
+    color: #2e7d32;
+}
+
+.bad {
+    color: #d32f2f;
+}
+
+.explanation {
+    font-size: 19px;
+    line-height: 1.5;
+}
+
+.finished {
+    display: none;
+    background: white;
+    border-radius: 25px;
+    padding: 30px 15px;
+    margin-top: 20px;
+    box-shadow: 0 5px 15px #ccc;
+}
+
+.finished h2 {
+    font-size: 30px;
+    color: #2e7d32;
+}
+
+.final-score {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+@media (max-width: 380px) {
     h1 {
-        color: #2e7d32;
-        font-size: 26px;
-        margin-bottom: 10px;
-    }
-
-    .score {
-        font-size: 20px;
-        font-weight: bold;
-        margin: 15px 0;
+        font-size: 24px;
     }
 
     .question {
-        background: white;
-        border-radius: 20px;
-        padding: 25px 15px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-        margin-top: 20px;
-    }
-
-    .division {
-        font-size: 42px;
-        font-weight: bold;
-        margin: 15px 0 25px;
-        color: #222;
-    }
-
-    .instruction {
-        font-size: 18px;
-        margin-bottom: 20px;
-    }
-
-    .answers {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        flex-wrap: wrap;
-    }
-
-    .answer-box {
-        width: 130px;
-    }
-
-    label {
-        display: block;
-        font-size: 17px;
-        font-weight: bold;
-        margin-bottom: 7px;
+        font-size: 38px;
     }
 
     input {
-        width: 100%;
-        padding: 14px;
-        font-size: 24px;
-        text-align: center;
-        border: 2px solid #bbb;
-        border-radius: 12px;
-        outline: none;
+        height: 58px;
+        font-size: 26px;
     }
-
-    input:focus {
-        border-color: #4CAF50;
-    }
-
-    button {
-        border: none;
-        border-radius: 12px;
-        padding: 14px 25px;
-        font-size: 18px;
-        font-weight: bold;
-        cursor: pointer;
-        margin: 10px 5px;
-    }
-
-    #checkBtn {
-        background: #4CAF50;
-        color: white;
-    }
-
-    #nextBtn {
-        background: #2196F3;
-        color: white;
-        display: none;
-    }
-
-    #restartBtn {
-        background: #ff9800;
-        color: white;
-    }
-
-    .message {
-        min-height: 35px;
-        font-size: 19px;
-        font-weight: bold;
-        margin: 15px 0;
-    }
-
-    .good {
-        color: #2e7d32;
-    }
-
-    .bad {
-        color: #d32f2f;
-    }
-
-    .explanation {
-        font-size: 17px;
-        margin-top: 10px;
-    }
-
-    @media (max-width: 400px) {
-        .division {
-            font-size: 35px;
-        }
-
-        .answer-box {
-            width: 120px;
-        }
-
-        h1 {
-            font-size: 23px;
-        }
-    }
+}
 </style>
 </head>
 
@@ -158,28 +200,43 @@
 
 <div class="app">
 
-    <h1>🧮 Quotient et reste</h1>
+    <h1>🧮 Le jeu du reste</h1>
 
-    <div class="score">
-        Score : <span id="score">0</span>
+    <div class="subtitle">
+        Trouve le quotient et le reste !
     </div>
 
-    <div class="question">
+    <div class="score">
+        ⭐ Score : <span id="score">0</span> / 10
+    </div>
 
-        <div class="instruction">
-            Combien de fois le diviseur est-il contenu dans le dividende ?
+    <div class="stars" id="stars">
+        ☆ ☆ ☆ ☆ ☆
+    </div>
+
+    <div class="card" id="game">
+
+        <div class="question-number">
+            Question <span id="questionNumber">1</span> / 10
         </div>
 
-        <div class="division">
+        <div class="question">
             <span id="dividend">22</span>
             ÷
             <span id="divisor">6</span>
         </div>
 
+        <div class="help">
+            🤔 Combien de fois peut-on mettre
+            <b id="helpDivisor">6</b>
+            dans
+            <b id="helpDividend">22</b> ?
+        </div>
+
         <div class="answers">
 
-            <div class="answer-box">
-                <label for="quotient">Quotient</label>
+            <div class="box">
+                <label>🔢 Quotient</label>
                 <input
                     id="quotient"
                     type="number"
@@ -189,8 +246,8 @@
                 >
             </div>
 
-            <div class="answer-box">
-                <label for="remainder">Reste</label>
+            <div class="box">
+                <label>🔵 Reste</label>
                 <input
                     id="remainder"
                     type="number"
@@ -206,71 +263,105 @@
 
         <div id="explanation" class="explanation"></div>
 
-        <button id="checkBtn" onclick="checkAnswer()">
-            Vérifier
+        <button id="check" onclick="checkAnswer()">
+            ✅ Vérifier
         </button>
 
-        <button id="nextBtn" onclick="newQuestion()">
-            Question suivante →
+        <button id="next" onclick="nextQuestion()">
+            👉 Question suivante
         </button>
 
     </div>
 
-    <button id="restartBtn" onclick="restartGame()">
-        🔄 Recommencer
-    </button>
+    <div class="finished" id="finished">
+
+        <h2>🎉 Bravo ! 🎉</h2>
+
+        <div class="final-score">
+            Ton score :
+            <span id="finalScore">0</span> / 10
+        </div>
+
+        <div id="finalStars" class="stars"></div>
+
+        <button id="restart" onclick="restartGame()">
+            🔄 Rejouer
+        </button>
+
+    </div>
 
 </div>
 
 <script>
 
-let dividend = 22;
-let divisor = 6;
+let dividend;
+let divisor;
 
 let score = 0;
+let questionNumber = 1;
 let answered = false;
+
+const TOTAL_QUESTIONS = 10;
+
+
+// -----------------------------
+// Nouvelle question
+// -----------------------------
 
 function newQuestion() {
 
     // Diviseur entre 2 et 9
     divisor = Math.floor(Math.random() * 8) + 2;
 
-    // Dividende entre 10 et 99
-    dividend = Math.floor(Math.random() * 90) + 10;
+    // Pour commencer, nombres entre 10 et 50
+    dividend = Math.floor(Math.random() * 41) + 10;
 
     document.getElementById("dividend").textContent = dividend;
     document.getElementById("divisor").textContent = divisor;
+
+    document.getElementById("helpDividend").textContent = dividend;
+    document.getElementById("helpDivisor").textContent = divisor;
+
+    document.getElementById("questionNumber").textContent =
+        questionNumber;
 
     document.getElementById("quotient").value = "";
     document.getElementById("remainder").value = "";
 
     document.getElementById("message").textContent = "";
+    document.getElementById("message").className = "message";
+
     document.getElementById("explanation").textContent = "";
 
-    document.getElementById("checkBtn").style.display = "inline-block";
-    document.getElementById("nextBtn").style.display = "none";
+    document.getElementById("check").style.display = "block";
+    document.getElementById("next").style.display = "none";
 
     answered = false;
 
     document.getElementById("quotient").focus();
+
+    updateStars();
 }
 
+
+// -----------------------------
+// Vérifier
+// -----------------------------
 
 function checkAnswer() {
 
     if (answered) return;
 
-    const userQuotient =
-        Number(document.getElementById("quotient").value);
+    const q = Number(
+        document.getElementById("quotient").value
+    );
 
-    const userRemainder =
-        Number(document.getElementById("remainder").value);
+    const r = Number(
+        document.getElementById("remainder").value
+    );
 
-    const correctQuotient =
-        Math.floor(dividend / divisor);
-
-    const correctRemainder =
-        dividend % divisor;
+    const correctQ = Math.floor(dividend / divisor);
+    const correctR = dividend % divisor;
 
     const message =
         document.getElementById("message");
@@ -278,48 +369,130 @@ function checkAnswer() {
     const explanation =
         document.getElementById("explanation");
 
-    if (
-        userQuotient === correctQuotient &&
-        userRemainder === correctRemainder
-    ) {
+
+    if (q === correctQ && r === correctR) {
 
         score++;
 
         document.getElementById("score").textContent = score;
 
-        message.textContent = "🎉 Bravo ! Bonne réponse.";
+        message.textContent = "🎉 BRAVO ! C'est juste !";
         message.className = "message good";
 
-        explanation.textContent =
-            `${dividend} = ${divisor} × ${correctQuotient} + ${correctRemainder}`;
+        explanation.innerHTML =
+            `👏 ${dividend} = ${divisor} × ${correctQ} + ${correctR}`;
 
     } else {
 
-        message.textContent = "❌ Ce n'est pas correct.";
+        message.textContent = "😊 Essaie encore la prochaine fois !";
         message.className = "message bad";
 
-        explanation.textContent =
-            `La bonne réponse est : quotient = ${correctQuotient}, reste = ${correctRemainder}.`;
+        explanation.innerHTML =
+            `La réponse était :<br>
+             🔢 Quotient = <b>${correctQ}</b><br>
+             🔵 Reste = <b>${correctR}</b><br><br>
+             ${dividend} = ${divisor} × ${correctQ} + ${correctR}`;
     }
 
-    document.getElementById("checkBtn").style.display = "none";
-    document.getElementById("nextBtn").style.display = "inline-block";
-
     answered = true;
+
+    document.getElementById("check").style.display = "none";
+
+    if (questionNumber < TOTAL_QUESTIONS) {
+        document.getElementById("next").style.display = "block";
+    } else {
+        setTimeout(showResult, 700);
+    }
+
+    updateStars();
 }
 
 
-function restartGame() {
+// -----------------------------
+// Question suivante
+// -----------------------------
 
-    score = 0;
+function nextQuestion() {
 
-    document.getElementById("score").textContent = score;
+    questionNumber++;
 
     newQuestion();
 }
 
 
-// Première question
+// -----------------------------
+// Étoiles
+// -----------------------------
+
+function updateStars() {
+
+    let stars = "";
+
+    for (let i = 0; i < 5; i++) {
+
+        if (i < Math.min(score, 5)) {
+            stars += "⭐ ";
+        } else {
+            stars += "☆ ";
+        }
+    }
+
+    document.getElementById("stars").textContent = stars;
+}
+
+
+// -----------------------------
+// Résultat final
+// -----------------------------
+
+function showResult() {
+
+    document.getElementById("game").style.display = "none";
+
+    document.getElementById("finished").style.display = "block";
+
+    document.getElementById("finalScore").textContent = score;
+
+    let finalStars = "";
+
+    if (score === 10) {
+        finalStars = "⭐⭐⭐⭐⭐<br>🏆 Champion !";
+    }
+    else if (score >= 7) {
+        finalStars = "⭐⭐⭐⭐<br>🌟 Super !";
+    }
+    else if (score >= 5) {
+        finalStars = "⭐⭐⭐<br>👏 Bravo !";
+    }
+    else {
+        finalStars = "⭐⭐<br>💪 Continue à t'entraîner !";
+    }
+
+    document.getElementById("finalStars").innerHTML =
+        finalStars;
+}
+
+
+// -----------------------------
+// Recommencer
+// -----------------------------
+
+function restartGame() {
+
+    score = 0;
+    questionNumber = 1;
+
+    document.getElementById("score").textContent = "0";
+
+    document.getElementById("game").style.display = "block";
+
+    document.getElementById("finished").style.display = "none";
+
+    newQuestion();
+}
+
+
+// Lancer le jeu
 newQuestion();
 
 </script>
