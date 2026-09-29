@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#4CAF50">
 
-<title>Jeu du Quotient et du Reste</title>
+<title>Jeu du quotient et du reste</title>
 
 <style>
 * {
@@ -20,39 +20,85 @@ body {
 }
 
 .app {
-    max-width: 500px;
+    width: 100%;
+    max-width: 520px;
     margin: auto;
     padding: 15px;
     text-align: center;
 }
 
 h1 {
-    font-size: 28px;
     color: #2e7d32;
-    margin: 10px 0;
+    font-size: 28px;
+    margin: 8px 0;
 }
 
 .subtitle {
-    font-size: 19px;
+    font-size: 18px;
     color: #555;
     margin-bottom: 15px;
 }
 
-.score {
-    background: white;
+/* MENU */
+
+.menu {
+    display: block;
+}
+
+.menu button {
+    width: 90%;
+    max-width: 380px;
+    border: none;
     border-radius: 20px;
-    padding: 12px;
+    padding: 18px;
+    margin: 9px auto;
     font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    display: block;
+}
+
+.facile {
+    background: #4CAF50;
+    color: white;
+}
+
+.moyen {
+    background: #FF9800;
+    color: white;
+}
+
+.difficile {
+    background: #e53935;
+    color: white;
+}
+
+.progressionBtn {
+    background: #2196F3;
+    color: white;
+}
+
+.erreursBtn {
+    background: #9C27B0;
+    color: white;
+}
+
+/* JEU */
+
+.game {
+    display: none;
+}
+
+.topbar {
+    background: white;
+    border-radius: 18px;
+    padding: 12px;
+    font-size: 19px;
     font-weight: bold;
     box-shadow: 0 3px 10px #ccc;
 }
 
-.stars {
-    font-size: 30px;
-    margin: 8px;
-}
-
-.card {
+.question-card {
     background: white;
     border-radius: 25px;
     padding: 22px 15px;
@@ -60,24 +106,29 @@ h1 {
     box-shadow: 0 5px 15px #ccc;
 }
 
-.question-number {
-    font-size: 18px;
-    color: #777;
+.level {
+    font-size: 20px;
+    font-weight: bold;
 }
 
-.question {
-    font-size: 44px;
+.question-number {
+    color: #777;
+    margin-top: 8px;
+}
+
+.division {
+    font-size: 45px;
     font-weight: bold;
-    margin: 20px 0;
     color: #1565c0;
+    margin: 18px 0;
 }
 
 .help {
-    font-size: 19px;
     background: #fff8e1;
     border-radius: 15px;
-    padding: 12px;
-    margin-bottom: 18px;
+    padding: 13px;
+    font-size: 18px;
+    margin-bottom: 20px;
 }
 
 .answers {
@@ -86,11 +137,11 @@ h1 {
     justify-content: center;
 }
 
-.box {
+.answer-box {
     width: 45%;
 }
 
-.box label {
+.answer-box label {
     display: block;
     font-size: 18px;
     font-weight: bold;
@@ -111,54 +162,133 @@ input:focus {
     border-color: #2196f3;
 }
 
-button {
+.mainButton,
+.backButton {
     width: 90%;
     max-width: 350px;
     border: none;
     border-radius: 18px;
     padding: 16px;
-    margin: 10px auto;
-    font-size: 22px;
+    margin: 12px auto;
+    font-size: 21px;
     font-weight: bold;
-    display: block;
     cursor: pointer;
+    display: block;
 }
 
-#check {
-    background: #4caf50;
+.check {
+    background: #4CAF50;
     color: white;
 }
 
-#next {
-    background: #2196f3;
+.next {
+    background: #2196F3;
     color: white;
     display: none;
 }
 
-#restart {
-    background: #ff9800;
+.backButton {
+    background: #757575;
     color: white;
 }
 
-.message {
-    min-height: 40px;
-    font-size: 22px;
-    font-weight: bold;
-    margin: 12px;
+.result {
+    min-height: 70px;
+    margin-top: 15px;
+    font-size: 18px;
+    line-height: 1.6;
 }
 
-.good {
+.correct {
     color: #2e7d32;
+    font-weight: bold;
 }
 
-.bad {
+.wrong {
+    color: #d32f2f;
+    font-weight: bold;
+}
+
+.correction {
+    background: #f5f5f5;
+    border-radius: 15px;
+    padding: 12px;
+    margin-top: 10px;
+}
+
+/* PROGRESSION */
+
+.page {
+    display: none;
+}
+
+.progressCard {
+    background: white;
+    border-radius: 20px;
+    padding: 18px;
+    margin: 12px 0;
+    box-shadow: 0 4px 12px #ccc;
+}
+
+.progressTitle {
+    font-size: 21px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.progressBar {
+    height: 25px;
+    background: #ddd;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    width: 0%;
+    background: #4CAF50;
+    transition: width 0.5s;
+}
+
+.progressText {
+    margin-top: 8px;
+    font-size: 18px;
+}
+
+/* ERREURS */
+
+.errorCard {
+    background: white;
+    border-radius: 18px;
+    padding: 15px;
+    margin: 10px 0;
+    text-align: left;
+    box-shadow: 0 3px 10px #ccc;
+}
+
+.errorDivision {
+    font-size: 25px;
+    font-weight: bold;
+    color: #1565c0;
+}
+
+.errorAnswer {
+    margin-top: 7px;
     color: #d32f2f;
 }
 
-.explanation {
-    font-size: 19px;
-    line-height: 1.5;
+.correctAnswer {
+    color: #2e7d32;
 }
+
+.noErrors {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    font-size: 20px;
+}
+
+/* FIN */
 
 .finished {
     display: none;
@@ -170,27 +300,37 @@ button {
 }
 
 .finished h2 {
-    font-size: 30px;
     color: #2e7d32;
+    font-size: 30px;
 }
 
-.final-score {
-    font-size: 26px;
+.finalScore {
+    font-size: 25px;
     font-weight: bold;
 }
 
+.stars {
+    font-size: 28px;
+    margin: 10px;
+}
+
 @media (max-width: 380px) {
+
     h1 {
         font-size: 24px;
     }
 
-    .question {
-        font-size: 38px;
+    .division {
+        font-size: 37px;
     }
 
     input {
         height: 58px;
-        font-size: 26px;
+        font-size: 27px;
+    }
+
+    .answer-box label {
+        font-size: 16px;
     }
 }
 </style>
@@ -200,43 +340,84 @@ button {
 
 <div class="app">
 
-    <h1>🧮 Le jeu du reste</h1>
+<h1>🧮 Quotient & Reste</h1>
 
-    <div class="subtitle">
-        Trouve le quotient et le reste !
+<div class="subtitle">
+Apprends en jouant !
+</div>
+
+
+<!-- ================= MENU ================= -->
+
+<div id="menu" class="menu">
+
+    <button class="facile" onclick="startGame('facile')">
+        🟢 Facile
+    </button>
+
+    <button class="moyen" onclick="startGame('moyen')">
+        🟠 Moyen
+    </button>
+
+    <button class="difficile" onclick="startGame('difficile')">
+        🔴 Difficile
+    </button>
+
+    <button class="progressionBtn" onclick="showProgression()">
+        📈 Ma progression
+    </button>
+
+    <button class="erreursBtn" onclick="showErrors()">
+        ❌ Mes erreurs
+    </button>
+
+</div>
+
+
+<!-- ================= JEU ================= -->
+
+<div id="game" class="game">
+
+    <div class="topbar">
+
+        ⭐ Score :
+        <span id="score">0</span> / 10
+
+        <br>
+
+        <span id="levelName"></span>
+
     </div>
 
-    <div class="score">
-        ⭐ Score : <span id="score">0</span> / 10
-    </div>
-
-    <div class="stars" id="stars">
-        ☆ ☆ ☆ ☆ ☆
-    </div>
-
-    <div class="card" id="game">
+    <div class="question-card">
 
         <div class="question-number">
             Question <span id="questionNumber">1</span> / 10
         </div>
 
-        <div class="question">
+        <div class="division">
+
             <span id="dividend">22</span>
             ÷
             <span id="divisor">6</span>
+
         </div>
 
         <div class="help">
-            🤔 Combien de fois peut-on mettre
-            <b id="helpDivisor">6</b>
-            dans
-            <b id="helpDividend">22</b> ?
+
+            💡 Trouve le
+            <b>quotient</b>
+            et le
+            <b>reste</b>.
+
         </div>
 
         <div class="answers">
 
-            <div class="box">
+            <div class="answer-box">
+
                 <label>🔢 Quotient</label>
+
                 <input
                     id="quotient"
                     type="number"
@@ -244,10 +425,14 @@ button {
                     min="0"
                     placeholder="?"
                 >
+
             </div>
 
-            <div class="box">
+
+            <div class="answer-box">
+
                 <label>🔵 Reste</label>
+
                 <input
                     id="remainder"
                     type="number"
@@ -255,245 +440,1027 @@ button {
                     min="0"
                     placeholder="?"
                 >
+
             </div>
 
         </div>
 
-        <div id="message" class="message"></div>
 
-        <div id="explanation" class="explanation"></div>
+        <div id="result" class="result"></div>
 
-        <button id="check" onclick="checkAnswer()">
+
+        <button
+            id="check"
+            class="mainButton check"
+            onclick="checkAnswer()">
+
             ✅ Vérifier
+
         </button>
 
-        <button id="next" onclick="nextQuestion()">
+
+        <button
+            id="next"
+            class="mainButton next"
+            onclick="nextQuestion()">
+
             👉 Question suivante
+
         </button>
 
-    </div>
 
-    <div class="finished" id="finished">
+        <button
+            class="backButton"
+            onclick="backToMenu()">
 
-        <h2>🎉 Bravo ! 🎉</h2>
+            🏠 Menu
 
-        <div class="final-score">
-            Ton score :
-            <span id="finalScore">0</span> / 10
-        </div>
-
-        <div id="finalStars" class="stars"></div>
-
-        <button id="restart" onclick="restartGame()">
-            🔄 Rejouer
         </button>
 
     </div>
 
 </div>
 
+
+<!-- ================= FIN ================= -->
+
+<div id="finished" class="finished">
+
+    <h2>🎉 Partie terminée !</h2>
+
+    <div class="finalScore">
+
+        Score :
+        <span id="finalScore">0</span> / 10
+
+    </div>
+
+    <div id="finalStars" class="stars"></div>
+
+    <button
+        class="mainButton check"
+        onclick="restartSameLevel()">
+
+        🔄 Rejouer
+
+    </button>
+
+    <button
+        class="backButton"
+        onclick="backToMenu()">
+
+        🏠 Menu
+
+    </button>
+
+</div>
+
+
+<!-- ================= PROGRESSION ================= -->
+
+<div id="progression" class="page">
+
+    <h2>📈 Ma progression</h2>
+
+
+    <div class="progressCard">
+
+        <div class="progressTitle">
+            🟢 Facile
+        </div>
+
+        <div class="progressBar">
+            <div id="progressFacile"
+                 class="progressFill">
+            </div>
+        </div>
+
+        <div id="textFacile"
+             class="progressText">
+        </div>
+
+    </div>
+
+
+    <div class="progressCard">
+
+        <div class="progressTitle">
+            🟠 Moyen
+        </div>
+
+        <div class="progressBar">
+            <div id="progressMoyen"
+                 class="progressFill">
+            </div>
+        </div>
+
+        <div id="textMoyen"
+             class="progressText">
+        </div>
+
+    </div>
+
+
+    <div class="progressCard">
+
+        <div class="progressTitle">
+            🔴 Difficile
+        </div>
+
+        <div class="progressBar">
+            <div id="progressDifficile"
+                 class="progressFill">
+            </div>
+        </div>
+
+        <div id="textDifficile"
+             class="progressText">
+        </div>
+
+    </div>
+
+
+    <button
+        class="backButton"
+        onclick="backToMenu()">
+
+        🏠 Retour
+
+    </button>
+
+</div>
+
+
+<!-- ================= ERREURS ================= -->
+
+<div id="errorsPage" class="page">
+
+    <h2>❌ Mes erreurs</h2>
+
+    <div id="errorsList"></div>
+
+
+    <button
+        id="practiceErrors"
+        class="mainButton erreursBtn"
+        onclick="practiceErrors()">
+
+        🎯 Refaire mes erreurs
+
+    </button>
+
+
+    <button
+        class="backButton"
+        onclick="backToMenu()">
+
+        🏠 Retour
+
+    </button>
+
+</div>
+
+
 <script>
 
-let dividend;
-let divisor;
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let level = "facile";
+
+let dividend = 22;
+let divisor = 6;
 
 let score = 0;
 let questionNumber = 1;
+
 let answered = false;
 
-const TOTAL_QUESTIONS = 10;
+const TOTAL = 10;
+
+let errorMode = false;
+let errorQuestions = [];
+
+let errorIndex = 0;
 
 
-// -----------------------------
-// Nouvelle question
-// -----------------------------
+/* =====================================================
+   DONNÉES DE PROGRESSION
+===================================================== */
 
-function newQuestion() {
+let progress = JSON.parse(
+    localStorage.getItem("divisionProgress")
+) || {
 
-    // Diviseur entre 2 et 9
-    divisor = Math.floor(Math.random() * 8) + 2;
+    facile: {
+        questions: 0,
+        correct: 0
+    },
 
-    // Pour commencer, nombres entre 10 et 50
-    dividend = Math.floor(Math.random() * 41) + 10;
+    moyen: {
+        questions: 0,
+        correct: 0
+    },
 
-    document.getElementById("dividend").textContent = dividend;
-    document.getElementById("divisor").textContent = divisor;
-
-    document.getElementById("helpDividend").textContent = dividend;
-    document.getElementById("helpDivisor").textContent = divisor;
-
-    document.getElementById("questionNumber").textContent =
-        questionNumber;
-
-    document.getElementById("quotient").value = "";
-    document.getElementById("remainder").value = "";
-
-    document.getElementById("message").textContent = "";
-    document.getElementById("message").className = "message";
-
-    document.getElementById("explanation").textContent = "";
-
-    document.getElementById("check").style.display = "block";
-    document.getElementById("next").style.display = "none";
-
-    answered = false;
-
-    document.getElementById("quotient").focus();
-
-    updateStars();
-}
-
-
-// -----------------------------
-// Vérifier
-// -----------------------------
-
-function checkAnswer() {
-
-    if (answered) return;
-
-    const q = Number(
-        document.getElementById("quotient").value
-    );
-
-    const r = Number(
-        document.getElementById("remainder").value
-    );
-
-    const correctQ = Math.floor(dividend / divisor);
-    const correctR = dividend % divisor;
-
-    const message =
-        document.getElementById("message");
-
-    const explanation =
-        document.getElementById("explanation");
-
-
-    if (q === correctQ && r === correctR) {
-
-        score++;
-
-        document.getElementById("score").textContent = score;
-
-        message.textContent = "🎉 BRAVO ! C'est juste !";
-        message.className = "message good";
-
-        explanation.innerHTML =
-            `👏 ${dividend} = ${divisor} × ${correctQ} + ${correctR}`;
-
-    } else {
-
-        message.textContent = "😊 Essaie encore la prochaine fois !";
-        message.className = "message bad";
-
-        explanation.innerHTML =
-            `La réponse était :<br>
-             🔢 Quotient = <b>${correctQ}</b><br>
-             🔵 Reste = <b>${correctR}</b><br><br>
-             ${dividend} = ${divisor} × ${correctQ} + ${correctR}`;
+    difficile: {
+        questions: 0,
+        correct: 0
     }
 
-    answered = true;
-
-    document.getElementById("check").style.display = "none";
-
-    if (questionNumber < TOTAL_QUESTIONS) {
-        document.getElementById("next").style.display = "block";
-    } else {
-        setTimeout(showResult, 700);
-    }
-
-    updateStars();
-}
+};
 
 
-// -----------------------------
-// Question suivante
-// -----------------------------
+/* =====================================================
+   ERREURS
+===================================================== */
 
-function nextQuestion() {
-
-    questionNumber++;
-
-    newQuestion();
-}
+let errors = JSON.parse(
+    localStorage.getItem("divisionErrors")
+) || [];
 
 
-// -----------------------------
-// Étoiles
-// -----------------------------
+/* =====================================================
+   DÉMARRER UN NIVEAU
+===================================================== */
 
-function updateStars() {
+function startGame(selectedLevel) {
 
-    let stars = "";
+    level = selectedLevel;
 
-    for (let i = 0; i < 5; i++) {
-
-        if (i < Math.min(score, 5)) {
-            stars += "⭐ ";
-        } else {
-            stars += "☆ ";
-        }
-    }
-
-    document.getElementById("stars").textContent = stars;
-}
-
-
-// -----------------------------
-// Résultat final
-// -----------------------------
-
-function showResult() {
-
-    document.getElementById("game").style.display = "none";
-
-    document.getElementById("finished").style.display = "block";
-
-    document.getElementById("finalScore").textContent = score;
-
-    let finalStars = "";
-
-    if (score === 10) {
-        finalStars = "⭐⭐⭐⭐⭐<br>🏆 Champion !";
-    }
-    else if (score >= 7) {
-        finalStars = "⭐⭐⭐⭐<br>🌟 Super !";
-    }
-    else if (score >= 5) {
-        finalStars = "⭐⭐⭐<br>👏 Bravo !";
-    }
-    else {
-        finalStars = "⭐⭐<br>💪 Continue à t'entraîner !";
-    }
-
-    document.getElementById("finalStars").innerHTML =
-        finalStars;
-}
-
-
-// -----------------------------
-// Recommencer
-// -----------------------------
-
-function restartGame() {
+    errorMode = false;
 
     score = 0;
     questionNumber = 1;
 
     document.getElementById("score").textContent = "0";
 
-    document.getElementById("game").style.display = "block";
+    document.getElementById("menu").style.display = "none";
+
+    document.getElementById("progression").style.display = "none";
+
+    document.getElementById("errorsPage").style.display = "none";
 
     document.getElementById("finished").style.display = "none";
+
+    document.getElementById("game").style.display = "block";
+
+    setLevelName();
 
     newQuestion();
 }
 
 
-// Lancer le jeu
-newQuestion();
+/* =====================================================
+   NOM DU NIVEAU
+===================================================== */
+
+function setLevelName() {
+
+    let name = "";
+
+    if (level === "facile") {
+        name = "🟢 Niveau Facile";
+    }
+
+    if (level === "moyen") {
+        name = "🟠 Niveau Moyen";
+    }
+
+    if (level === "difficile") {
+        name = "🔴 Niveau Difficile";
+    }
+
+    document.getElementById("levelName").textContent = name;
+}
+
+
+/* =====================================================
+   GÉNÉRER UNE QUESTION
+===================================================== */
+
+function newQuestion() {
+
+    if (errorMode) {
+
+        generateErrorQuestion();
+
+        return;
+    }
+
+
+    if (level === "facile") {
+
+        /*
+        Quotient de 1 chiffre.
+        Nombres simples pour commencer.
+        */
+
+        divisor =
+            Math.floor(Math.random() * 5) + 2;
+
+        dividend =
+            Math.floor(Math.random() * 45) + 10;
+
+
+        while (
+            Math.floor(dividend / divisor) < 1 ||
+            Math.floor(dividend / divisor) > 9
+        ) {
+
+            dividend =
+                Math.floor(Math.random() * 45) + 10;
+        }
+    }
+
+
+    else if (level === "moyen") {
+
+        /*
+        Quotient de 1 ou 2 chiffres.
+        */
+
+        divisor =
+            Math.floor(Math.random() * 8) + 2;
+
+        dividend =
+            Math.floor(Math.random() * 90) + 20;
+
+    }
+
+
+    else if (level === "difficile") {
+
+        /*
+        Nombres plus grands.
+        Quotient pouvant être à 2 chiffres.
+        */
+
+        divisor =
+            Math.floor(Math.random() * 8) + 2;
+
+        dividend =
+            Math.floor(Math.random() * 400) + 100;
+    }
+
+
+    displayQuestion();
+}
+
+
+/* =====================================================
+   QUESTION DANS L'ÉCRAN
+===================================================== */
+
+function displayQuestion() {
+
+    document.getElementById("dividend").textContent =
+        dividend;
+
+    document.getElementById("divisor").textContent =
+        divisor;
+
+    document.getElementById("questionNumber").textContent =
+        questionNumber;
+
+    document.getElementById("quotient").value = "";
+
+    document.getElementById("remainder").value = "";
+
+    document.getElementById("result").innerHTML = "";
+
+    document.getElementById("check").style.display =
+        "block";
+
+    document.getElementById("next").style.display =
+        "none";
+
+    answered = false;
+
+    document.getElementById("quotient").focus();
+}
+
+
+/* =====================================================
+   VÉRIFIER
+===================================================== */
+
+function checkAnswer() {
+
+    if (answered) return;
+
+
+    const userQ =
+        Number(
+            document.getElementById("quotient").value
+        );
+
+    const userR =
+        Number(
+            document.getElementById("remainder").value
+        );
+
+
+    const correctQ =
+        Math.floor(dividend / divisor);
+
+    const correctR =
+        dividend % divisor;
+
+
+    const quotientOK =
+        userQ === correctQ;
+
+    const remainderOK =
+        userR === correctR;
+
+
+    let html = "";
+
+
+    /* ----------------------------------
+       LES DEUX SONT JUSTES
+    ---------------------------------- */
+
+    if (quotientOK && remainderOK) {
+
+        score++;
+
+        html = `
+        <div class="correct">
+            🎉 BRAVO ! Les deux réponses sont justes !
+        </div>
+
+        <div class="correction">
+            ${dividend} = ${divisor} ×
+            ${correctQ} + ${correctR}
+        </div>
+        `;
+    }
+
+
+    /* ----------------------------------
+       QUOTIENT JUSTE
+       RESTE FAUX
+    ---------------------------------- */
+
+    else if (quotientOK && !remainderOK) {
+
+        html = `
+        <div class="correct">
+            ✅ Quotient : BRAVO !
+        </div>
+
+        <div class="wrong">
+            ❌ Reste : ce n'est pas correct.
+        </div>
+
+        <div class="correction">
+            Le bon reste est :
+            <b>${correctR}</b>
+            <br><br>
+            ${dividend} = ${divisor} ×
+            ${correctQ} + ${correctR}
+        </div>
+        `;
+    }
+
+
+    /* ----------------------------------
+       QUOTIENT FAUX
+       RESTE JUSTE
+    ---------------------------------- */
+
+    else if (!quotientOK && remainderOK) {
+
+        html = `
+        <div class="wrong">
+            ❌ Quotient : ce n'est pas correct.
+        </div>
+
+        <div class="correct">
+            ✅ Reste : BRAVO !
+        </div>
+
+        <div class="correction">
+            Le bon quotient est :
+            <b>${correctQ}</b>
+            <br><br>
+            ${dividend} = ${divisor} ×
+            ${correctQ} + ${correctR}
+        </div>
+        `;
+    }
+
+
+    /* ----------------------------------
+       LES DEUX SONT FAUX
+    ---------------------------------- */
+
+    else {
+
+        html = `
+        <div class="wrong">
+            ❌ Il faut encore travailler les deux.
+        </div>
+
+        <div class="correction">
+            🔢 Quotient :
+            <b>${correctQ}</b>
+            <br>
+
+            🔵 Reste :
+            <b>${correctR}</b>
+            <br><br>
+
+            ${dividend} = ${divisor} ×
+            ${correctQ} + ${correctR}
+        </div>
+        `;
+    }
+
+
+    document.getElementById("result").innerHTML =
+        html;
+
+
+    /* ----------------------------------
+       ENREGISTRER LA PROGRESSION
+    ---------------------------------- */
+
+    progress[level].questions++;
+
+
+    if (quotientOK && remainderOK) {
+
+        progress[level].correct++;
+    }
+
+
+    saveProgress();
+
+
+    /* ----------------------------------
+       ENREGISTRER L'ERREUR
+    ---------------------------------- */
+
+    if (!quotientOK || !remainderOK) {
+
+        saveError(
+            dividend,
+            divisor,
+            userQ,
+            userR,
+            correctQ,
+            correctR,
+            level
+        );
+    }
+
+
+    document.getElementById("score").textContent =
+        score;
+
+
+    answered = true;
+
+    document.getElementById("check").style.display =
+        "none";
+
+
+    if (errorMode) {
+
+        if (errorIndex < errorQuestions.length - 1) {
+
+            document.getElementById("next").style.display =
+                "block";
+
+        } else {
+
+            setTimeout(showFinal, 800);
+        }
+
+    }
+
+    else {
+
+        if (questionNumber < TOTAL) {
+
+            document.getElementById("next").style.display =
+                "block";
+
+        } else {
+
+            setTimeout(showFinal, 800);
+        }
+    }
+}
+
+
+/* =====================================================
+   SAUVEGARDER UNE ERREUR
+===================================================== */
+
+function saveError(
+    div,
+    diviseur,
+    userQ,
+    userR,
+    correctQ,
+    correctR,
+    niveau
+) {
+
+    /*
+    Évite de multiplier exactement
+    la même erreur dans la liste.
+    */
+
+    const exists = errors.some(e =>
+        e.dividend === div &&
+        e.divisor === diviseur
+    );
+
+
+    if (!exists) {
+
+        errors.push({
+
+            dividend: div,
+
+            divisor: diviseur,
+
+            userQ: userQ,
+
+            userR: userR,
+
+            correctQ: correctQ,
+
+            correctR: correctR,
+
+            level: niveau
+
+        });
+
+        localStorage.setItem(
+            "divisionErrors",
+            JSON.stringify(errors)
+        );
+    }
+}
+
+
+/* =====================================================
+   QUESTION SUIVANTE
+===================================================== */
+
+function nextQuestion() {
+
+    if (errorMode) {
+
+        errorIndex++;
+
+        if (
+            errorIndex >=
+            errorQuestions.length
+        ) {
+
+            showFinal();
+
+            return;
+        }
+
+        dividend =
+            errorQuestions[errorIndex].dividend;
+
+        divisor =
+            errorQuestions[errorIndex].divisor;
+
+    }
+
+    else {
+
+        questionNumber++;
+    }
+
+
+    displayQuestion();
+}
+
+
+/* =====================================================
+   FIN DE PARTIE
+===================================================== */
+
+function showFinal() {
+
+    document.getElementById("game").style.display =
+        "none";
+
+    document.getElementById("finished").style.display =
+        "block";
+
+    document.getElementById("finalScore").textContent =
+        score;
+
+
+    let stars = "";
+
+    if (score >= 9) {
+
+        stars =
+            "⭐⭐⭐⭐⭐<br>🏆 Excellent !";
+    }
+
+    else if (score >= 7) {
+
+        stars =
+            "⭐⭐⭐⭐<br>🌟 Super !";
+    }
+
+    else if (score >= 5) {
+
+        stars =
+            "⭐⭐⭐<br>👏 Bravo !";
+    }
+
+    else {
+
+        stars =
+            "⭐⭐<br>💪 Continue à t'entraîner !";
+    }
+
+
+    document.getElementById("finalStars").innerHTML =
+        stars;
+}
+
+
+/* =====================================================
+   REJOUER LE MÊME NIVEAU
+===================================================== */
+
+function restartSameLevel() {
+
+    document.getElementById("finished").style.display =
+        "none";
+
+    startGame(level);
+}
+
+
+/* =====================================================
+   PROGRESSION
+===================================================== */
+
+function saveProgress() {
+
+    localStorage.setItem(
+        "divisionProgress",
+        JSON.stringify(progress)
+    );
+}
+
+
+function showProgression() {
+
+    document.getElementById("menu").style.display =
+        "none";
+
+    document.getElementById("game").style.display =
+        "none";
+
+    document.getElementById("errorsPage").style.display =
+        "none";
+
+    document.getElementById("finished").style.display =
+        "none";
+
+    document.getElementById("progression").style.display =
+        "block";
+
+
+    updateProgress(
+        "facile",
+        "progressFacile",
+        "textFacile"
+    );
+
+    updateProgress(
+        "moyen",
+        "progressMoyen",
+        "textMoyen"
+    );
+
+    updateProgress(
+        "difficile",
+        "progressDifficile",
+        "textDifficile"
+    );
+}
+
+
+function updateProgress(
+    niveau,
+    barId,
+    textId
+) {
+
+    const questions =
+        progress[niveau].questions;
+
+    const correct =
+        progress[niveau].correct;
+
+
+    let percent = 0;
+
+    if (questions > 0) {
+
+        percent =
+            Math.round(
+                correct / questions * 100
+            );
+    }
+
+
+    document.getElementById(barId).style.width =
+        percent + "%";
+
+
+    document.getElementById(textId).textContent =
+        `${percent}% de réussite — ${correct} bonne(s) réponse(s) sur ${questions}`;
+}
+
+
+/* =====================================================
+   MES ERREURS
+===================================================== */
+
+function showErrors() {
+
+    document.getElementById("menu").style.display =
+        "none";
+
+    document.getElementById("game").style.display =
+        "none";
+
+    document.getElementById("progression").style.display =
+        "none";
+
+    document.getElementById("finished").style.display =
+        "none";
+
+    document.getElementById("errorsPage").style.display =
+        "block";
+
+
+    const list =
+        document.getElementById("errorsList");
+
+
+    if (errors.length === 0) {
+
+        list.innerHTML = `
+            <div class="noErrors">
+                🎉 Bravo !<br><br>
+                Tu n'as pas encore d'erreurs à revoir.
+            </div>
+        `;
+
+        document.getElementById(
+            "practiceErrors"
+        ).style.display = "none";
+
+        return;
+    }
+
+
+    document.getElementById(
+        "practiceErrors"
+    ).style.display = "block";
+
+
+    let html = "";
+
+
+    errors.forEach((e, index) => {
+
+        html += `
+
+        <div class="errorCard">
+
+            <div class="errorDivision">
+                ${e.dividend} ÷ ${e.divisor}
+            </div>
+
+            <div class="errorAnswer">
+
+                Ta réponse :
+                quotient = ${e.userQ},
+                reste = ${e.userR}
+
+            </div>
+
+            <div class="correctAnswer">
+
+                Correction :
+                quotient = ${e.correctQ},
+                reste = ${e.correctR}
+
+            </div>
+
+        </div>
+
+        `;
+    });
+
+
+    list.innerHTML = html;
+}
+
+
+/* =====================================================
+   REFAIRE LES ERREURS
+===================================================== */
+
+function practiceErrors() {
+
+    if (errors.length === 0) {
+
+        return;
+    }
+
+
+    errorMode = true;
+
+    errorQuestions =
+        [...errors];
+
+    errorIndex = 0;
+
+    score = 0;
+
+    questionNumber = 1;
+
+
+    dividend =
+        errorQuestions[0].dividend;
+
+    divisor =
+        errorQuestions[0].divisor;
+
+
+    document.getElementById("errorsPage").style.display =
+        "none";
+
+    document.getElementById("game").style.display =
+        "block";
+
+    document.getElementById("finished").style.display =
+        "none";
+
+    document.getElementById("score").textContent =
+        "0";
+
+    document.getElementById("levelName").textContent =
+        "🎯 Révision de mes erreurs";
+
+    displayQuestion();
+}
+
+
+/* =====================================================
+   MENU
+===================================================== */
+
+function backToMenu() {
+
+    document.getElementById("game").style.display =
+        "none";
+
+    document.getElementById("progression").style.display =
+        "none";
+
+    document.getElementById("errorsPage").style.display =
+        "none";
+
+    document.getElementById("finished").style.display =
+        "none";
+
+    document.getElementById("menu").style.display =
+        "block";
+
+    errorMode = false;
+}
+
+
+/* =====================================================
+   LANCEMENT
+===================================================== */
+
+document.getElementById("menu").style.display =
+    "block";
 
 </script>
 
