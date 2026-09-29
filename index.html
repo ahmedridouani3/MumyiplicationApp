@@ -626,7 +626,7 @@ Apprends en jouant !
 /* =====================================================
    VARIABLES
 ===================================================== */
-
+let sessionQuestions = new Set();
 let level = "facile";
 
 let dividend = 22;
@@ -685,6 +685,7 @@ let errors = JSON.parse(
 ===================================================== */
 
 function startGame(selectedLevel) {
+  sessionQuestions = new Set();
 
     level = selectedLevel;
 
@@ -1096,35 +1097,55 @@ function saveError(
    QUESTION SUIVANTE
 ===================================================== */
 
-function nextQuestion() {
-
-    // MODE "MES ERREURS"
+function newQuestion() {
     if (errorMode) {
-
-        errorIndex++;
-
-        if (errorIndex >= errorQuestions.length) {
-            showFinal();
-            return;
-        }
-
-        dividend =
-            errorQuestions[errorIndex].dividend;
-
-        divisor =
-            errorQuestions[errorIndex].divisor;
-
-        displayQuestion();
-
+        generateErrorQuestion();
         return;
     }
 
-    // MODE NORMAL
-    questionNumber++;
+    let key;
+    let attempts = 0;
 
-    newQuestion();
+    do {
+        if (level === "facile") {
+
+            // Quotient toujours entre 1 et 9
+            divisor = Math.floor(Math.random() * 4) + 2; // 2 à 5
+            const quotient = Math.floor(Math.random() * 9) + 1; // 1 à 9
+            const reste = Math.floor(Math.random() * divisor); // 0 à divisor-1
+
+            dividend = divisor * quotient + reste;
+
+        } 
+        else if (level === "moyen") {
+
+            // Quotient toujours entre 1 et 9
+            divisor = Math.floor(Math.random() * 8) + 2; // 2 à 9
+            const quotient = Math.floor(Math.random() * 9) + 1; // 1 à 9
+            const reste = Math.floor(Math.random() * divisor);
+
+            dividend = divisor * quotient + reste;
+
+        } 
+        else if (level === "difficile") {
+
+            // Quotient entre 10 et 50
+            divisor = Math.floor(Math.random() * 9) + 2; // 2 à 10
+            const quotient = Math.floor(Math.random() * 41) + 10; // 10 à 50
+            const reste = Math.floor(Math.random() * divisor);
+
+            dividend = divisor * quotient + reste;
+        }
+
+        key = `${dividend}-${divisor}`;
+        attempts++;
+
+    } while (sessionQuestions.has(key) && attempts < 100);
+
+    sessionQuestions.add(key);
+
+    displayQuestion();
 }
-
 function generateErrorQuestion() {
 
     if (errorQuestions.length === 0) {
